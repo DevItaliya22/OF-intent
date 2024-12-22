@@ -54,21 +54,37 @@ export class AuthService {
     return user;
   }
 
-  async resetPassword(token:string , currentPassword : string, newPassword: string): Promise<void>
-  {
-    const payload = this.verifyToken(token);
-    const user = await this.users.firstWhere({ email: payload.email });
+  async resetPassword(
+    email: string,
+    currentPassword: string,
+    newPassword: string,
+  ): Promise<{ message: string; success: boolean }> {
+    const user = await this.users.firstWhere({ email });
     if (!compareSync(currentPassword, user.password)) {
       throw new Unauthorized();
     }
+  
     const hashedPassword = hashSync(newPassword, 10);
-    await this.users.updateWhere({ email: user.email }, { password: hashedPassword });
+    const updatedUser = await this.users.updateWhere({ email }, { password: hashedPassword });
+  
+    return {
+      message: updatedUser ? 'User password updated successfully' : 'User password not updated',
+      success: !!updatedUser,
+    };
+  }
+  
+
+  async followUser(token:string, userId: string): Promise<{message : string, success : boolean}>{
+
+    
+    return {message : "User followed successfully", success : true};
   }
 
   private verifyToken(token: string): any {
     try {
+      console.log(this.config.get<string>('app.url'));
       return verify(token, this.config.get<string>('auth.secret') as string, {
-        issuer: this.config.get<string>('app.url'), // means the token is issued by this url (means by that xyz username)
+        issuer: this.config.get<string>('app.url'), 
       });
     } catch (err) {
       throw new Unauthorized();

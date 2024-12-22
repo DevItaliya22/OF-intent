@@ -7,7 +7,6 @@ export class UserController extends Transformable{
         super();
     }
 
-    // checked
     @Get("")
     async getUsers(@Req() req: Request, @Res() res: Response) {
       const users = await this.service.getUsers();
@@ -17,7 +16,6 @@ export class UserController extends Transformable{
       return res.status(200).json(users); 
     }
 
-    // checked
     @Get("/:id")
     async getUsersList(@Param("id") id: string) {
       const user = await this.service.getUserById(id);

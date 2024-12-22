@@ -1,18 +1,24 @@
+done :
+
 POST /auth/register - User registration.
 POST /auth/login - User login.
-POST /auth/logout - User logout.
-POST /auth/forgot-password - Request password reset.
 POST /auth/reset-password - Reset password.
-GET /auth/verify-email/:token - Verify user email.
-POST /auth/resend-verification-email - Resend verification email.
-User Routes
-GET /user - Fetch all users (e.g., for admin or follower suggestions).
 GET /user/:id - Fetch a specific user's profile.
+
+
+remaining : 
+
+POST /auth/forgot-password - Request password reset. => need to send mail 
+
+GET /auth/verify-email/:token - Verify user email.  => need to send mail
+
+
+User Routes
+
 PUT /user/:id - Update user profile (bio, profile picture, banner, etc.).
-GET /user/:id/followers - Fetch a user's followers.
-GET /user/:id/following - Fetch users a user is following.
 POST /user/:id/follow - Follow a user.
 DELETE /user/:id/unfollow - Unfollow a user.
+
 Post Routes
 POST /posts - Create a new post (text and optional image).
 GET /posts - Fetch all posts (e.g., for a feed).
@@ -24,6 +30,8 @@ DELETE /posts/:id/unlike - Unlike a post.
 GET /posts/:id/comments - Fetch comments on a post.
 POST /posts/:id/comments - Add a comment to a post.
 DELETE /posts/:postId/comments/:commentId - Delete a comment.
+
+
 Notification Routes
 GET /notifications - Fetch all notifications for the logged-in user.
 PUT /notifications/:id/mark-as-read - Mark a notification as read.

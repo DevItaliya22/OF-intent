@@ -11,6 +11,7 @@ import { AuthController } from './controllers/auth';
 import { UserController } from './controllers/user';
 import { Server } from '@intentjs/hyper-express';
 import bodyParser from 'body-parser';
+import { AuthMiddleware } from './middleware/middleware';
 
 export class HttpKernel extends Kernel {
   /**
@@ -38,7 +39,7 @@ export class HttpKernel extends Kernel {
   public routeMiddlewares(configurator: MiddlewareConfigurator) {
     // Add body parser middleware here
     // configurator.use(bodyParser);  // Adds JSON body parsing middleware
-    return [bodyParser.json()]
+    configurator.use(AuthMiddleware).for("/auth/reset-password");
   }
 
   /**
