@@ -205,33 +205,26 @@ export class AuthService {
 
   async register(dto: RegisterDto): Promise<UserModel> {
     console.log(dto, "in services ");
-    
-    // const existingUser = await this.users.firstWhere({ email: dto.email }, false);
-    // if (existingUser) {
-    //   throw new ValidationFailed({
-    //     email: ['Email is already used by another account!'],
-    //   });
-    // }
 
-    // const user = await this.users.create({
-    //   id: ulid(),
-    //   firstName: dto.firstName,
-    //   lastName: dto.lastName,
-    //   email: dto.email,
-    //   password: hashSync(dto.password, 10),
-    // });
+    const existingUser = await this.users.firstWhere({ email: dto.email }, false);
+    if (existingUser) {
+      throw new ValidationFailed({
+        email: ['Email is already used by another account!'],
+      });
+    }
 
-    // user.token = this.makeToken({ sub: user.id, email: user.email });
-    // console.log(user);
-    const user = new UserModel();
-    user.id = ulid();
-    user.firstName = dto.firstName;
-    user.lastName = dto.lastName;
-    user.email = dto.email;
-    user.password = '';
-    user.token = '{token:}';
-    user.createdAt = new Date();
-    user.updatedAt = new Date();
+    const user = await this.users.create({
+      id: ulid(),
+      firstName: dto.firstName,
+      lastName: dto.lastName,
+      email: dto.email,
+      password: hashSync(dto.password, 10),
+    });
+
+    user.token = this.makeToken({ sub: user.id, email: user.email });
+    console.log(user);
+
+
     return user;
   }
 
