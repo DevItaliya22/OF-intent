@@ -15,10 +15,7 @@ import { generateOtp } from 'app/utils';
 import {
   ChangePasswordUsingTokenDto,
   LoginDto,
-  RegisterDto,
-  RequestPasswordChangeOtpDto,
-  VerifyEmailDto,
-  VerifyOtpForChangePasswordDto,
+  RegisterDto
 } from 'app/validators/auth';
 import { compareSync, hashSync } from 'bcrypt';
 import { JwtPayload, sign, verify } from 'jsonwebtoken';
@@ -49,14 +46,14 @@ export class AuthService {
       lastName: dto.lastName,
       email: dto.email,
       password: hashSync(dto.password, 10),
-      passwordChangedAt: new Date(),
+      // passwordChangedAt: new Date(),
     });
 
     user.token = await this.makeToken({
       sub: user.id,
       env: this.config.get('app.env'),
       emailVerifiedAt: user.emailVerifiedAt,
-      passwordChangedAt: user.passwordChangedAt,
+      // passwordChangedAt: user.passwordChangedAt,
     });
 
     return user;
@@ -73,13 +70,13 @@ export class AuthService {
       sub: user.id,
       env: this.config.get('app.env'),
       emailVerifiedAt: user.emailVerifiedAt,
-      passwordChangedAt: user.passwordChangedAt,
+      // passwordChangedAt: user.passwordChangedAt,
     });
 
     return user;
   }
 
-  async verifyEmail(dto: VerifyEmailDto): Promise<void> {
+  async verifyEmail(dto: any): Promise<void> {
     const payload = await this.verifyToken(dto.token);
     if (payload.email != dto.email) {
       throw new GenericException(
@@ -95,7 +92,7 @@ export class AuthService {
   }
 
   async requestPasswordChangeOtp(
-    dto: RequestPasswordChangeOtpDto,
+    dto: any,
   ): Promise<void> {
     const user = await this.users.firstWhere({ email: dto.email }, false);
     if (!user) {
@@ -129,7 +126,7 @@ export class AuthService {
   }
 
   async verifyOtpForPasswordChange(
-    dto: VerifyOtpForChangePasswordDto,
+    dto: any,
   ): Promise<string> {
     const cacheKey = Cache.genKey({
       type: 'PASSWORD_CHANGE_OTP',
@@ -167,7 +164,7 @@ export class AuthService {
       { email: payload.email },
       {
         password: hashSync(dto.password, 10),
-        passwordChangedAt: new Date(),
+        // passwordChangedAt: new Date(),
       },
     );
   }

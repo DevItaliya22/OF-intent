@@ -6,3 +6,4 @@ export class UserDbRepository extends DatabaseRepository<UserModel> {
   @InjectModel(UserModel)
   model: UserModel;
 }
+

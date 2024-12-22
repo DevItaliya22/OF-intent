@@ -6,8 +6,9 @@ import {
   MiddlewareConfigurator,
   Type,
 } from '@intentjs/core';
-import { UserController } from './controllers/app';
+import { MainController } from './controllers/app';
 import { AuthController } from './controllers/auth';
+import { UserController } from './controllers/user';
 import { Server } from '@intentjs/hyper-express';
 
 export class HttpKernel extends Kernel {
@@ -16,7 +17,8 @@ export class HttpKernel extends Kernel {
    * Read more - https://tryintent.com/docs/controllers
    */
   public controllers(): Type<any>[] {
-    return [UserController, AuthController];
+    const controllers = [UserController, MainController, AuthController];
+    return [UserController ,MainController, AuthController];
   }
 
   /**

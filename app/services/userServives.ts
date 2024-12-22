@@ -7,7 +7,15 @@ export class UserService {
     @Inject('USER_DB_REPO') private readonly users: UserDbRepository,
   ) {}
 
-  getHello(): string {
-    return __('hello', { name: 'Intent' });
+  async getUsers() {
+    const users = await this.users.all();
+    console.log(users);
+    return users;
+  }
+
+  async getUserById(id: string) {
+    const user = await this.users.firstWhere({ id });
+    console.log(user);
+    return user;
   }
 }

@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, MAX_LENGTH, MaxLength, MinLength } from 'class-validator';
 
 export class LoginDto {
   @IsEmail()
@@ -8,6 +8,7 @@ export class LoginDto {
   @IsString()
   @IsNotEmpty()
   @MinLength(6)
+  @MaxLength(25)
   password: string;
 }
 
@@ -18,41 +19,6 @@ export class RegisterDto extends LoginDto {
 
   @IsString()
   lastName: string;
-
-  @IsEmail()
-  @IsNotEmpty()
-  email: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(6)
-  password: string;
-}
-
-export class VerifyEmailDto {
-  @IsString()
-  @IsNotEmpty()
-  token: string;
-
-  @IsEmail()
-  @IsNotEmpty()
-  email: string;
-}
-
-export class RequestPasswordChangeOtpDto {
-  @IsString()
-  @IsNotEmpty()
-  email: string;
-}
-
-export class VerifyOtpForChangePasswordDto {
-  @IsString()
-  @IsNotEmpty()
-  email: string;
-
-  @IsString()
-  @IsNotEmpty()
-  otp: string;
 }
 
 export class ChangePasswordUsingTokenDto {
@@ -62,5 +28,7 @@ export class ChangePasswordUsingTokenDto {
 
   @IsString()
   @IsNotEmpty()
+  @MinLength(6)
+  @MaxLength(25)
   password: string;
 }

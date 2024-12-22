@@ -1,6 +1,6 @@
 import { IntentApplicationContext, ServiceProvider } from '@intentjs/core';
 import { UserDbRepository } from 'app/repositories/userDbRepository';
-import { UserService } from 'app/services';
+import { UserService } from 'app/services/userServives';
 import { AuthService } from 'app/services/auth';
 
 export class AppServiceProvider extends ServiceProvider {

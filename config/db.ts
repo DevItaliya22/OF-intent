@@ -1,6 +1,8 @@
 import { DatabaseOptions, configNamespace } from '@intentjs/core';
 import { knexSnakeCaseMappers } from 'objection';
 
+console.log('DB_DEBUG', process.env.DB_DEBUG);
+
 export default configNamespace(
   'db',
   (): DatabaseOptions => ({
@@ -17,6 +19,9 @@ export default configNamespace(
           user: process.env.DB_USER,
           password: process.env.DB_PASSWORD,
           charset: 'utf8',
+          ssl: {
+            rejectUnauthorized: false,  // Set to true to enforce SSL certificate validation
+          },
         },
         useNullAsDefault: true,
         migrations: {

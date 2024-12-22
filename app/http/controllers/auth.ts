@@ -11,8 +11,8 @@ import { UserTransformer } from 'app/transformers/user';
 import {
   LoginDto,
   RegisterDto,
-  RequestPasswordChangeOtpDto,
-  VerifyEmailDto,
+  // RequestPasswordChangeOtpDto,
+  // VerifyEmailDto,
 } from 'app/validators/auth';
 
 @Controller('auth')
@@ -37,13 +37,13 @@ export class AuthController extends Transformable {
   }
 
   @Get('verify-email')
-  async verifyEmail(@Body() dto: VerifyEmailDto) {
+  async verifyEmail(@Body() dto: any) {
     await this.auth.verifyEmail(dto);
   }
 
   @Post('forgot-password')
-  @Validate(RequestPasswordChangeOtpDto)
-  async forgotPassword(@Body() dto: RequestPasswordChangeOtpDto) {
+  // @Validate(RequestPasswordChangeOtpDto)
+  async forgotPassword(@Body() dto: any) {
     await this.auth.requestPasswordChangeOtp(dto);
     return {
       success: true,

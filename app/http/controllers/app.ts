@@ -1,14 +1,10 @@
 import { Controller, Get, Req, Request, Res, Response } from '@intentjs/core';
-import { UserService } from 'app/services';
 
 @Controller()
-export class UserController {
-  constructor(private readonly service: UserService) {}
+export class MainController {
 
-  @Get()
-  async getHello(@Req() req: Request, @Res() res: Response) {
-    return res.json({ hello: 'world' });
-    req.path;
-    return { hello: 'world' };
+  @Get("")
+  async getHeatlhCheck(@Req() req: Request, @Res() res: Response) {
+    return res.json({ message: 'Server is up and running' });
   }
 }
