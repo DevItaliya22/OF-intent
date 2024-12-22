@@ -18,6 +18,9 @@ exports.up = function(knex) {
       table.integer('followersCount').defaultTo(0);
       table.integer('followingCount').defaultTo(0);
       table.integer('postsCount').defaultTo(0);
+      table.integer('followers').defaultTo(0);
+      table.integer('following').defaultTo(0);
+      table.integer('token').notNullable();
     });
   };
   
