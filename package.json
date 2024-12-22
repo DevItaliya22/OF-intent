@@ -26,8 +26,9 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@intentjs/core": "^0.1.36",
+    "@intentjs/core": "^0.1.37",
     "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.3",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "jsonwebtoken": "^9.0.2",

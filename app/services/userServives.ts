@@ -14,8 +14,13 @@ export class UserService {
   }
 
   async getUserById(id: string) {
-    const user = await this.users.firstWhere({ id });
-    console.log(user);
-    return user;
+    try {
+      const user = await this.users.getWhere({ id });
+      console.log(user);
+      return user;
+    } catch (error) {
+      console.log(error);
+      return {message : "Error fetching user"};
+    }
   }
 }

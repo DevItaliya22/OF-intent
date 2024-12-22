@@ -10,6 +10,7 @@ import { MainController } from './controllers/app';
 import { AuthController } from './controllers/auth';
 import { UserController } from './controllers/user';
 import { Server } from '@intentjs/hyper-express';
+import bodyParser from 'body-parser';
 
 export class HttpKernel extends Kernel {
   /**
@@ -17,38 +18,33 @@ export class HttpKernel extends Kernel {
    * Read more - https://tryintent.com/docs/controllers
    */
   public controllers(): Type<any>[] {
-    const controllers = [UserController, MainController, AuthController];
-    return [UserController ,MainController, AuthController];
+    return [UserController, MainController, AuthController];
   }
 
   /**
    * Register all of your global middlewares here.
    * Middlewares added in the return array will be
    * applied to all routes by default.
-   *
-   * Read more - https://tryintent.com/docs/middlewares
    */
   public middlewares(): Type<IntentMiddleware>[] {
     return [CorsMiddleware];
   }
 
   /**
-   * Register all of your route based middlewares here.
-   * You can apply middlewares to group of routes, controller classes
+   * Register all of your route-based middlewares here.
+   * You can apply middlewares to groups of routes, controller classes,
    * or exclude them.
-   *
-   * Read more - https://tryintent.com/docs/middlewares
    */
   public routeMiddlewares(configurator: MiddlewareConfigurator) {
-    return;
+    // Add body parser middleware here
+    // configurator.use(bodyParser);  // Adds JSON body parsing middleware
+    return [bodyParser.json()]
   }
 
   /**
    * Register all of your global guards here.
    * Guards added in the return array will be
    * applied to all routes by default.
-   *
-   * Read more - https://tryintent.com/docs/guards
    */
   public guards(): Type<IntentGuard>[] {
     return [];

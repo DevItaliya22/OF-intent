@@ -21,10 +21,7 @@ export class UserController extends Transformable{
       const user = await this.service.getUserById(id);
       console.log(id);
 
-      return {
-        success: true,
-        message: 'OTP sent to registered email!',
-      };
+      return user
     }
 }
 
