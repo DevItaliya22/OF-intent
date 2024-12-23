@@ -17,8 +17,6 @@ export class UserModel extends BaseModel {
   followersCount?: number;
   followingCount?: number;
   postsCount?: number;
-  followers?: UserModel[];
-  following?: UserModel[];
 
   token?: string;
 }

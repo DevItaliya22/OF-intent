@@ -1,7 +1,7 @@
-
-
 import { ConfigService, Inject, Injectable, Unauthorized, ValidationFailed } from '@intentjs/core';
 import { UserModel } from 'app/models/userModel';
+import { FollowDbRepository } from 'app/repositories/followDbRepository';
+import { NotificationDbRepository } from 'app/repositories/notificationDbRepository';
 import { UserDbRepository } from 'app/repositories/userDbRepository';
 import { LoginDto, RegisterDto } from 'app/validators/auth';
 import { hashSync, compareSync } from 'bcrypt';
@@ -13,6 +13,7 @@ export class AuthService {
   constructor(
     private config: ConfigService,
     @Inject('USER_DB_REPO') private users: UserDbRepository,
+    @Inject('NOTIFICATION_DB_REPO') private notifications: NotificationDbRepository,
   ) {}
 
   async register(dto: RegisterDto): Promise<UserModel> {
@@ -73,13 +74,6 @@ export class AuthService {
     };
   }
   
-
-  async followUser(token:string, userId: string): Promise<{message : string, success : boolean}>{
-
-    
-    return {message : "User followed successfully", success : true};
-  }
-
   private verifyToken(token: string): any {
     try {
       console.log(this.config.get<string>('app.url'));

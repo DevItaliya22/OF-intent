@@ -39,7 +39,10 @@ export class HttpKernel extends Kernel {
   public routeMiddlewares(configurator: MiddlewareConfigurator) {
     // Add body parser middleware here
     // configurator.use(bodyParser);  // Adds JSON body parsing middleware
-    configurator.use(AuthMiddleware).for("/auth/reset-password");
+    configurator.use(AuthMiddleware)
+      .for("/auth/reset-password")
+      .for("/user/follow/:id")
+      .for("/user/unfollow/:id");
   }
 
   /**

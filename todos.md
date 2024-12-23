@@ -4,6 +4,9 @@ POST /auth/register - User registration.
 POST /auth/login - User login.
 POST /auth/reset-password - Reset password.
 GET /user/:id - Fetch a specific user's profile.
+POST /user/:id/follow - Follow a user.
+DELETE /user/:id/unfollow - Unfollow a user.
+
 
 
 remaining : 
@@ -16,8 +19,7 @@ GET /auth/verify-email/:token - Verify user email.  => need to send mail
 User Routes
 
 PUT /user/:id - Update user profile (bio, profile picture, banner, etc.).
-POST /user/:id/follow - Follow a user.
-DELETE /user/:id/unfollow - Unfollow a user.
+
 
 Post Routes
 POST /posts - Create a new post (text and optional image).
@@ -35,11 +37,15 @@ DELETE /posts/:postId/comments/:commentId - Delete a comment.
 Notification Routes
 GET /notifications - Fetch all notifications for the logged-in user.
 PUT /notifications/:id/mark-as-read - Mark a notification as read.
-DELETE /notifications/:id - Delete a specific notification.
+DELETE /notifications/:id - Delete a specific notification.\
+
+
+
 File Upload Routes (AWS S3 Integration)
 POST /upload/profile-picture - Upload a profile picture.
 POST /upload/banner-picture - Upload a banner picture.
 POST /upload/post-image - Upload an image for a post.
+
 Other Routes
 GET /feed - Fetch the user’s feed (posts from followed users).
 GET /search - Search for users or posts. nothing just 

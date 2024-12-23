@@ -1,16 +1,10 @@
 import {
-  Accepts,
   Body,
-  BufferBody,
   Controller,
-  Get,
-  Header,
   Post,
-  Query,
   Req,
   Request,
   Transformable,
-  Unauthorized,
   Validate,
 } from '@intentjs/core';
 import { AuthService } from 'app/services/auth';
@@ -67,28 +61,9 @@ export class AuthController extends Transformable {
       const email = userPayload.email;
 
       const payload2 = await req.all();
-    
+  
       const val = await this.auth.resetPassword(email, payload2.currentPassword, payload2.newPassword);
     
       return val;
     }
-    
-
-  // @Post("/follow/:id")
-  // async follow(
-  //   @Req() req: Request,
-  // ) {
-  //   const payload = await req.all();
-  //   const id = req.query.id;
-  //   const authHeader = req.header("Authorization");
-
-  //   if (!authHeader || !authHeader.startsWith('Bearer ')) {
-  //     return {message : "Invalid token"}
-  //   }
-
-  //   const token = authHeader.split(' ')[1];
-  //   // const res = await this.auth.follow(token, id);
-
-  //   // return res;
-  // }
 }
