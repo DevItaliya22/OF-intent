@@ -12,6 +12,7 @@ import { UserController } from './controllers/user';
 import { Server } from '@intentjs/hyper-express';
 import bodyParser from 'body-parser';
 import { AuthMiddleware } from './middleware/middleware';
+import { PostController } from './controllers/post';
 
 export class HttpKernel extends Kernel {
   /**
@@ -19,7 +20,7 @@ export class HttpKernel extends Kernel {
    * Read more - https://tryintent.com/docs/controllers
    */
   public controllers(): Type<any>[] {
-    return [UserController, MainController, AuthController];
+    return [UserController, MainController, AuthController,PostController];
   }
 
   /**
@@ -42,7 +43,8 @@ export class HttpKernel extends Kernel {
     configurator.use(AuthMiddleware)
       .for("/auth/reset-password")
       .for("/user/follow/:id")
-      .for("/user/unfollow/:id");
+      .for("/user/unfollow/:id")
+      .for("/post")
   }
 
   /**

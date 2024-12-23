@@ -1,6 +1,5 @@
 import { ConfigService, Inject, Injectable, Unauthorized, ValidationFailed } from '@intentjs/core';
 import { UserModel } from 'app/models/userModel';
-import { FollowDbRepository } from 'app/repositories/followDbRepository';
 import { NotificationDbRepository } from 'app/repositories/notificationDbRepository';
 import { UserDbRepository } from 'app/repositories/userDbRepository';
 import { LoginDto, RegisterDto } from 'app/validators/auth';

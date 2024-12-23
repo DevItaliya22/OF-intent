@@ -1,7 +1,7 @@
 import { Controller, Get, Param, Post, Req, Request, Res, Response, Transformable } from '@intentjs/core';
 import { AuthService } from 'app/services/auth';
 import { UserService } from "app/services/userServives";
-
+// 4
 @Controller("/user")
 export class UserController extends Transformable {
   constructor(private readonly service: UserService) {
