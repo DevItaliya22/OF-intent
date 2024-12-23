@@ -44,7 +44,8 @@ export class HttpKernel extends Kernel {
       .for("/auth/reset-password")
       .for("/user/follow/:id")
       .for("/user/unfollow/:id")
-      .for("/post")
+      .for("/post/")
+      .for("/post/:id")
   }
 
   /**
