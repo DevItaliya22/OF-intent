@@ -8,7 +8,7 @@ export class PostController extends Transformable {
     constructor(private posts : PostService) {
         super();
     }
-// create a post on logged in user
+// create a post on logged in users
   @Post("/")
   async createPost(@Body() body: Request,@Req() req: Request, @Res() res: Response) {
     // here we can add image upload logic
