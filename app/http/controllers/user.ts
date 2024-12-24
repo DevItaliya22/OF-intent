@@ -29,7 +29,6 @@ export class UserController extends Transformable {
   async follow(
     @Req() req: Request,
   ) {
-
     const userEmail = (req as any).user.email;
     const res = await this.service.follow(userEmail, req.params.id as string);
 

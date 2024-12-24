@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Post, Put, Req, Request, Res, Response, Transformable } from '@intentjs/core';
+import { Body, Controller, Delete, Get, Post, Put, Req, Request, Res, Response, Transformable } from '@intentjs/core';
 import { PostService } from 'app/services/post';
 
 @Controller("/post")
@@ -8,11 +8,10 @@ export class PostController extends Transformable {
     }
 // create a post on logged in user
   @Post("/")
-  async createPost(@Req() req: Request, @Res() res: Response) {
-    const payload = await req.all();
+  async createPost(@Body() body: Request,@Req() req: Request, @Res() res: Response) {
     // here we can add image upload logic
     const userEmail =  (req as any).user.email;
-    const post = await this.posts.createPost(userEmail,payload);
+    const post = await this.posts.createPost(userEmail,body);
     return res.json(post);
   }
 // if logged in user wants to delete his post
