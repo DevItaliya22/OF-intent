@@ -1,6 +1,8 @@
 import { Body, Controller, Delete, Get, Post, Put, Req, Request, Res, Response, Transformable } from '@intentjs/core';
 import { PostService } from 'app/services/post';
+import { UpdatePostDto } from 'app/validators/post';
 
+// 7 all routes checked and working
 @Controller("/post")
 export class PostController extends Transformable {
     constructor(private posts : PostService) {
@@ -40,9 +42,8 @@ export class PostController extends Transformable {
 
 // update post with :id id
   @Put("/:id")
-  async updatePost(@Req() req: Request, @Res() res: Response) {
-    const { text } = await req.all();
-    const post = await this.posts.updatePost(req.params.id as string, text);
+  async updatePost(@Body() dto:UpdatePostDto,@Req() req: Request, @Res() res: Response) {
+    const post = await this.posts.updatePost(req.params.id as string, dto.text);
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
     }

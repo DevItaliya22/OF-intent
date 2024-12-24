@@ -50,13 +50,13 @@ export class PostService {
     return post;
   }
 
-  async updatePost(id: string, text: string): Promise<any> {
+  async updatePost(id: string, text: string): Promise<{ message: string; success: boolean,post?:any }> {
     const post = await this.posts.getWhere({ id });
     if (!post) {
       return null; 
     }
-
-    return post;
+    const newPost = await this.posts.updateWhere({ id }, { text, updatedAt: new Date() });
+    return {message:"Post updated successfully", success:true,post:newPost};
   }
 
   async likePost(id: string): Promise<{ message: string; success: boolean }> {

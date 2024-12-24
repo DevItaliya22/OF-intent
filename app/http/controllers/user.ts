@@ -1,13 +1,13 @@
 import { Controller, Get, Param, Post, Req, Request, Res, Response, Transformable } from '@intentjs/core';
-import { AuthService } from 'app/services/auth';
 import { UserService } from "app/services/userServives";
-// 4
+
+// 4 all routes checked and working
 @Controller("/user")
 export class UserController extends Transformable {
   constructor(private readonly service: UserService) {
     super();
   }
-
+// get all users (can use limit / prefrences to get only few users)
   @Get("")
   async getUsers(@Req() req: Request, @Res() res: Response) {
     const users = await this.service.getUsers();
@@ -16,7 +16,7 @@ export class UserController extends Transformable {
     }
     return res.status(200).json(users);
   }
-
+// get all the info of :id user
   @Get("/:id")
   async getUsersList(@Param("id") id: string) {
     const user = await this.service.getUserById(id);
@@ -25,6 +25,7 @@ export class UserController extends Transformable {
     return user;
   }
 
+  // logged in user follows :id user
   @Post("/follow/:id")
   async follow(
     @Req() req: Request,
@@ -35,6 +36,7 @@ export class UserController extends Transformable {
     return res;
   }
 
+  // logged in user unfollows :id user
   @Post("/unfollow/:id")
   async unfollow(
     @Req() req: Request,

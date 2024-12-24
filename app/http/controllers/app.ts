@@ -1,6 +1,6 @@
 import { Controller, Get, Req, Request, Res, Response } from '@intentjs/core';
 
-// 1
+// 1 all routes checked and working
 @Controller()
 export class MainController {
   @Get("")

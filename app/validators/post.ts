@@ -26,8 +26,5 @@ export class UpdatePostDto {
   @MaxLength(500, { message: 'Post text should not exceed 500 characters' })
   text?: string;
 
-  @IsOptional()
-  @IsUrl({}, { message: 'Invalid image URL format' })
-  imageUrl?: string;
 
 }

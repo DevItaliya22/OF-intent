@@ -14,7 +14,7 @@ import {
   ResetPasswordDto,
 } from 'app/validators/auth';
 
-// 3
+// 3 all routes checked and working
 @Controller('/auth')
 export class AuthController extends Transformable {
   constructor(private auth: AuthService) {
