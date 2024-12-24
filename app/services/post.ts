@@ -76,4 +76,37 @@ export class PostService {
     await this.posts.updateWhere({ id }, { likesCount: post[0].likesCount - 1 });
     return ({message:"Post disliked", success:true});
   }
+
+  async getAllComments(id: string): Promise<any[]> {  
+    const post = await this.posts.getWhere({ id });
+    if (!post) {
+      return null; 
+    }
+    //  I know this is not the right way to get comments on a post but i could not find any method to get comments on a post only , and getWhere({isCommentOnPostId:id}) is giving error , might be it will be fixed in future
+    const comments = await this.posts.all();
+    const commentonPost = comments.map((comment)=> comment.isCommentOnPostId === post[0].id);
+    return commentonPost;
+  }
+
+  async addComment(email:string , id: string, text: string): Promise<{ message: string; success: boolean,comment?:any }> { 
+    const post = await this.posts.getWhere({ id });
+    if (!post) {
+      return null; 
+    }
+    const userAddingComment = await this.users.getWhere({ email });
+    const comment = await this.posts.create({ id:ulid(),userId:userAddingComment[0].id, text, createdAt: new Date(), updatedAt: new Date(),isCommentOnPostId:post[0].id });
+
+    const updateCount = await this.posts.updateWhere({ id },{commentsCount:post[0].commentsCount+1});
+
+    return {message:"Comment added successfully", success:true,comment};
+  }
+  async deleteComment(id: string): Promise<{ message: string; success: boolean }> {
+    const comment = await this.posts.getWhere({ id });
+    if (!comment) {
+      return ({message:"Comment not found", success:false});
+    }
+    await this.posts.deleteWhere({ id });
+    await this.posts.updateWhere({ id },{commentsCount:comment[0].commentsCount-1});
+    return ({message:"Comment deleted successfully", success:true});
+  }
 }

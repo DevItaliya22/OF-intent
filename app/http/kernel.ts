@@ -46,6 +46,9 @@ export class HttpKernel extends Kernel {
       .for("/user/unfollow/:id")
       .for("/post/")
       .for("/post/:id")
+        .for("/post/like/:id")
+        .for("/post/dislike/:id")
+        .for("/post/:id/comment")
   }
 
   /**

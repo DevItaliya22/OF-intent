@@ -11,7 +11,7 @@ export class PostModel extends BaseModel {
   updatedAt: Date;
   likesCount?: number;
   commentsCount?: number;
-
+  isCommentOnPostId?: string;  
   comments?: PostModel[];
 }
 

@@ -13,6 +13,7 @@ exports.up = function(knex) {
       table.timestamp('updatedAt').defaultTo(knex.fn.now());
       table.integer('likesCount').defaultTo(0);
       table.integer('commentsCount').defaultTo(0);
+      table.string("isCommentOnPostId").defaultTo("");
     });
   };
   
